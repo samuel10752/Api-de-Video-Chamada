@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    text-align: center;
+}
+h1 {
+    color: #333;
+    margin-top: 20px;
+}
+#localVideo {
+    width: 60%;
+    max-width: 600px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+#controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+#controls button {
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    background-color: #007BFF;
+    color: #fff;
+    transition: background-color 0.3s ease;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#controls button:hover {
+    background-color: #0056b3;
+}
+#inviteLinkText {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+}
+#inviteLinkText a {
+    color: #007BFF;
+    text-decoration: none;
+}
+#inviteLinkText a:hover {
+    text-decoration: underline;
+}

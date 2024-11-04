@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chamada de Vídeo com Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #333;
+            margin-top: 20px;
+        }
+        #videoContainer {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        #localVideo, #remoteVideo {
+            width: 45%;
+            max-width: 600px;
+            margin: 0 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            display: none;
+        }
+        #controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        #controls button {
+            padding: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 50%;
+            background-color: #007BFF;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+        #controls button:hover {
+            background-color: #0056b3;
+        }
+        #inviteLinkText {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 14px;
+            color: #333;
+            display: none;
+        }
+        #chatContainer {
+            margin: 20px auto;
+            width: 60%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+        #chatMessages {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+        #chatInput {
+            padding: 10px;
+            font-size: 16px;
+            width: 80%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        #sendButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: #fff;
+            margin-left: 5px;
+            transition: background-color 0.3s ease;
+        }
+        #sendButton:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chamada de Vídeo com Chat ao Vivo</h1>
+
+    <!-- Tela de espera para convidados -->
+    <div id="waitingScreen" style="display: none;">
+        <h2>Aguardando aprovação para entrar na sala...</h2>
+        <div id="waitingControls">
+            <button id="muteAudioWaiting"><i class="fas fa-microphone"></i></button>
+            <button id="muteVideoWaiting"><i class="fas fa-video"></i></button>
+        </div>
+    </div>
+
+    <!-- Tela principal para chamada de vídeo e chat -->
+    <div id="videoChatContainer" style="display: none;">
+        <div id="videoContainer">
+            <video id="localVideo" autoplay playsinline></video>
+            <video id="remoteVideo" autoplay playsinline></video>
+        </div>
+
+        <div id="controls">
+            <button id="muteAudio"><i class="fas fa-microphone"></i></button>
+            <button id="muteVideo"><i class="fas fa-video"></i></button>
+        </div>
+
+        <div id="chatContainer">
+            <div id="chatMessages"></div>
+            <input type="text" id="chatInput" placeholder="Digite uma mensagem..." autocomplete="off">
+            <button id="sendButton">Enviar</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

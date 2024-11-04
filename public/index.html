@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerar Link de Chamada</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Gerador de Link de Chamada</h1>
+    <button id="generateLinkButton">Gerar Link de Convite</button>
+    <p id="inviteLinkText"></p>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        document.getElementById('generateLinkButton').addEventListener('click', () => {
+            const roomId = Math.random().toString(36).substring(2, 15); // Gera um ID único para a sala
+            const inviteLink = `${window.location.origin}/call.html?roomId=${roomId}`;
+            document.getElementById('inviteLinkText').innerHTML = `Link de convite: <a href="${inviteLink}" target="_blank">${inviteLink}</a>`;
+        });
+    </script>
+</body>
+</html>
