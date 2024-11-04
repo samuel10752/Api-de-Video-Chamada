@@ -150,4 +150,37 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(offer => peerConnection.setLocalDescription(offer))
             .then(() => socket.emit('offer', { offer: peerConnection.localDescription, roomId }));
     }
+
+    // Funções de chat
+
+    // Enviar uma mensagem de chat
+    sendButton.addEventListener('click', () => {
+        const message = chatInput.value;
+        if (message) {
+            socket.emit('chat-message', { message, roomId }); // Envia para o servidor apenas
+            chatInput.value = ''; // Limpa o campo de entrada
+        }
+    });
+
+    // Receber uma nova mensagem de outro usuário e do próprio usuário
+    socket.on('chat-message', (data) => {
+        const sender = data.sender === socket.id ? 'Você' : 'Outro';
+        addMessage(sender, data.message);
+    });
+
+    // Receber histórico do chat ao entrar na sala
+    socket.on('chat-history', (messages) => {
+        messages.forEach(({ sender, message }) => {
+            const displaySender = sender === socket.id ? 'Você' : 'Outro';
+            addMessage(displaySender, message);
+        });
+    });
+
+    // Função para exibir mensagens no chat
+    function addMessage(sender, message) {
+        const messageElement = document.createElement('p');
+        messageElement.textContent = `${sender}: ${message}`;
+        chatMessages.appendChild(messageElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
 });
